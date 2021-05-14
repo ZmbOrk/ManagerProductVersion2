@@ -15,10 +15,14 @@ class ProductManagerTest {
     private Product first = new Book(1, "Сердце Пандоры", 596, "Мотидзуки Д");
     private Product second = new Book(2, "Пищеблок", 660, "Иванов А.");
     private Product third = new Book(3, "Берсерк. Том I", 730, "Миура К.");
-    private Product fourth = new Book(4, "Проекты с использованием контроллера Arduino", 580, "Петин В.");
+    private Product fourth = new Book(4, "Автостопом по галактике 2", 580, "Дуглас Адамс");
     private Product fifth = new Smartphone(5, "Apple iPhone 6", 22000, "Apple");
     private Product sixth = new Smartphone(6, "Samsung Galaxy S7", 35000, "SAMSUNG");
     private Product seventh = new Smartphone(7, "Honor 9C", 10000, "HONOR");
+    private Product eight = new Book(7, "Автостопом по галактике", 500, "Дуглас Адамс");
+    private Product ninth = new Smartphone(7, "Honor 1123C", 150000, "HONOR");
+
+
 
     @BeforeEach
     public void setUp() {
@@ -29,6 +33,9 @@ class ProductManagerTest {
         manager.add(fifth);
         manager.add(sixth);
         manager.add(seventh);
+        manager.add(eight);
+        manager.add(ninth);
+
     }
 
     @Test
@@ -72,4 +79,19 @@ class ProductManagerTest {
         Product[] expected = new Product[]{};
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void searchOneModelSmartphone() {
+        Product[] actual = manager.searchBy("HONOR");
+        Product[] expected = new Product[]{seventh, ninth};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void searchOneAuthorBook() {
+        Product[] actual = manager.searchBy("Дуглас Адамс");
+        Product[] expected = new Product[]{fourth, eight};
+        assertArrayEquals(expected, actual);
+    }
+
 }
